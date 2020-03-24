@@ -1,0 +1,93 @@
+<html>
+<head>
+<style>
+body {
+	background-image: url('https://cf.geekdo-images.com/imagepagezoom/img/tGaBzPUJiH37hYM1phqGYg1uASQ=/fit-in/1200x900/filters:no_upscale()/pic3165398.jpg');
+	background-repeat: no-repeat;
+	background-size: 600px;
+	background-position: top center;
+}
+
+table, tr, td {
+	border: 1px solid white;
+	text-align: center;
+}
+	
+#dicerolling {
+	background-color: rgba(255, 255, 255, 0.3);
+	color: #FFFFFF;
+	width: 600px;
+	
+	position: relative;
+	top: 200px;
+}
+
+.multiDiceOutput {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+</style>
+<script>
+	function rollDice() {
+		return Math.floor(Math.random() * 6 + 1)	
+	}
+
+	function rollDiceForOutput(numDiceSelectId, outputElementId) {
+		var outputString = ""
+		var numDice = document.getElementById(numDiceSelectId).selectedIndex + 1;
+		for (var i = 0; i < numDice; i++) {
+			outputString = outputString + rollDice() + "<br/>"
+		}
+		for (var i = numDice; i < 3; i++) {
+			outputString = outputString + "<br/>"
+		}
+		document.getElementById(outputElementId).innerHTML = outputString
+
+	}
+
+	function multiDiceRollToOutput() {
+		rollDiceForOutput("numDiceSelect1", "multiDiceOutput1")
+		rollDiceForOutput("numDiceSelect2", "multiDiceOutput2")
+	}
+</script>
+</head>
+<body>
+	<table id="dicerolling" align="center" >
+		<tr>
+			<td>
+				<select id="numDiceSelect1">
+					<option value="1">1 dice</option>
+					<option value="2">2 dice</option>
+					<option value="3">3 dice</option>
+				</select>
+			</td>
+			<td>
+				<select id="numDiceSelect2">
+					<option value="1">1 dice</option>
+					<option value="2">2 dice</option>
+					<option value="3">3 dice</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="multiDiceOutput" id="multiDiceOutput1">
+					<br/>
+					(no result yet)<br/>
+					<br/>				</div>
+			</td>
+			<td>
+				<div class="multiDiceOutput" id="multiDiceOutput2">
+					<br/>
+					(no result yet)<br/>
+					<br/>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2>
+				<button onclick="multiDiceRollToOutput()">Roll the dice!</button>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
